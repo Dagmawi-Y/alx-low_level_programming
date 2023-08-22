@@ -1,1 +1,1 @@
-x05. C - Pointers, arrays and strings
+tasks on pointers and arrays - 1
