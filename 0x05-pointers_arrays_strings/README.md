@@ -1,1 +1,1 @@
-tasks on pointers and arrays - 1
+readme at first iter tasks of pointers and arrays
