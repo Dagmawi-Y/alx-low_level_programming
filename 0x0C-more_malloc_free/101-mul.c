@@ -1,101 +1,165 @@
-#include "main.h"
-#include <stdlib.h>
+#include "holberton.h"
 #include <stdio.h>
-
-#define ERR_MSG "Error"
+#include <stdlib.h>
 
 /**
- * is_digit - checks if a string contains a non-digit char
- * @s: string to be evaluated
- *
- * Return: 0 if a non-digit is found, 1 otherwise
+ * _strlen - returns the length of a string
+ * @s: string s
+ * Return: length of string
  */
-int is_digit(char *s)
+int _strlen(char *s)
 {
-	int i = 0;
+	char *p = s;
 
-	while (s[i])
+	while (*s)
+		s++;
+	return (s - p);
+}
+
+/**
+ * _memset - fills memory with a constant byte.
+ * @s: the memory area to be filled
+ * @b: the constant byte
+ * @n: number of bytes to fill with char b
+ * Return: a pointer to the memory area s.
+ */
+
+char *_memset(char *s, char b, unsigned int n)
+{
+	char *p = s;
+
+	for (; n; n--)
+		*p++ = b;
+
+	return (s);
+}
+
+/**
+ * _calloc - allocates memory for an array
+ * @nmemb: number of elements
+ * @size: of each element
+ * Return: void *
+ */
+void *_calloc(unsigned int nmemb, unsigned int size)
+{
+	void *ptr;
+
+	if (size == 0 || nmemb == 0)
+		return (NULL);
+
+	ptr = malloc(nmemb * size);
+	if (ptr == NULL)
+		return (NULL);
+
+	_memset(ptr, 0, size * nmemb);
+
+	return (ptr);
+}
+
+/**
+ *_puts - prints a string, followed by a new line, to stdout.
+ * @str: the input string
+ * Return: nothing to return.
+ */
+void _puts(char *str)
+{
+	while (*str != 0)
 	{
-		if (s[i] < '0' || s[i] > '9')
+		_putchar(*str);
+		str++;
+	}
+	_putchar('\n');
+}
+
+/**
+ * strNumbers - determines if string has only numbers
+ * @str: input string
+ * Return: 0 if false, 1 if true
+ */
+int strNumbers(char *str)
+{
+	while (*str)
+	{
+		if (*str < '0' || *str > '9')
 			return (0);
-		i++;
+		str++;
 	}
 	return (1);
 }
 
 /**
- * _strlen - returns the length of a string
- * @s: string to evaluate
- *
- * Return: the length of the string
+ * multiply - multiplies two numbers (in string), and prints the result.
+ * @n1: first number
+ * @n2: second number
+ * Return: void
  */
-int _strlen(char *s)
-{
-	int i = 0;
 
-	while (s[i] != '\0')
+void multiply(char *n1, char *n2)
+{
+	int idx, n1n, n2n, res, tmp, total;
+	int n1l = _strlen(n1);
+	int n2l = _strlen(n2);
+
+	int *ptr;
+
+	tmp = n2l;
+	total = n1l + n2l;
+	ptr = _calloc(total, sizeof(int));
+	for (n1l--; n1l >= 0; n1l--)
 	{
-		i++;
-	}
-	return (i);
-}
-
-/**
- * errors - handles errors for main
- */
-void errors(void)
-{
-	printf("Error\n");
-	exit(98);
-}
-
-/**
- * main - multiplies two positive numbers
- * @argc: number of arguments
- * @argv: array of arguments
- *
- * Return: always 0 (Success)
- */
-int main(int argc, char *argv[])
-{
-	char *s1, *s2;
-	int len1, len2, len, i, carry, digit1, digit2, *result, a = 0;
-
-	s1 = argv[1], s2 = argv[2];
-	if (argc != 3 || !is_digit(s1) || !is_digit(s2))
-		errors();
-	len1 = _strlen(s1);
-	len2 = _strlen(s2);
-	len = len1 + len2 + 1;
-	result = malloc(sizeof(int) * len);
-	if (!result)
-		return (1);
-	for (i = 0; i <= len1 + len2; i++)
-		result[i] = 0;
-	for (len1 = len1 - 1; len1 >= 0; len1--)
-	{
-		digit1 = s1[len1] - '0';
-		carry = 0;
-		for (len2 = _strlen(s2) - 1; len2 >= 0; len2--)
+		n1n = n1[n1l] - '0';
+		res = 0;
+		n2l = tmp;
+		for (n2l--; n2l >= 0; n2l--)
 		{
-			digit2 = s2[len2] - '0';
-			carry += result[len1 + len2 + 1] + (digit1 * digit2);
-			result[len1 + len2 + 1] = carry % 10;
-			carry /= 10;
+			n2n = n2[n2l] - '0';
+			res += ptr[n1l + n2l + 1] + (n1n * n2n);
+			ptr[n1l + n2l + 1] = res % 10;
+			res /= 10;
 		}
-		if (carry > 0)
-			result[len1 + len2 + 1] += carry;
+		if (res)
+		{
+			ptr[n1l + n2l + 1] = res % 10;
+		}
 	}
-	for (i = 0; i < len - 1; i++)
+	res = 0;
+	for (idx = 0; idx < total; idx++)
 	{
-		if (result[i])
-			a = 1;
-		if (a)
-			_putchar(result[i] + '0');
+		if (ptr[idx] == 0 && res == 1)
+			_putchar(ptr[idx] + '0');
+		else if (ptr[idx] > 0)
+		{
+			_putchar(ptr[idx] + '0');
+			res = 1;
+		}
 	}
-	if (!a)
-		_putchar('0');
 	_putchar('\n');
-	free(result);
+	free(ptr);
+}
+
+/**
+ * main - adds positive numbers.
+ * @argc: the number of arguments
+ * @argv: the arguments
+ *
+ * Return: 0
+ */
+
+int main(int argc, char **argv)
+{
+	char *nb1 = argv[1];
+	char *nb2 = argv[2];
+
+	if (argc != 3 || !strNumbers(nb1) || !strNumbers(nb2))
+	{
+		_puts("Error");
+		exit(98);
+	}
+	if (*nb1 == '0' || *nb2 == '0')
+		_puts("0");
+	else
+	{
+		multiply(nb1, nb2);
+	}
 	return (0);
 }
