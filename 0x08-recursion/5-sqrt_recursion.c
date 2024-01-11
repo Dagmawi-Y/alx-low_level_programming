@@ -1,6 +1,16 @@
 #include "main.h"
 
 /**
+ * _sqrt_helper - Helper function for binary search.
+ * @n: The number to calculate the square root of.
+ * @start: The starting point of the search range.
+ * @end: The ending point of the search range.
+ *
+ * Return: The square root of the number or -1 if no natural square root.
+ */
+int _sqrt_helper(int n, int start, int end);
+
+/**
  * _sqrt_recursion - Returns the natural square root of a number.
  * @n: The number to calculate the square root of.
  *
@@ -31,7 +41,7 @@ int _sqrt_helper(int n, int start, int end)
 		return (-1);
 
 	int mid = (start + end) / 2;
-	long long mid_squared = (long long)mid * mid;
+	int mid_squared = mid * mid;
 
 	if (mid_squared == n)
 		return (mid);
