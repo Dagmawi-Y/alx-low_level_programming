@@ -1,6 +1,19 @@
 #include "main.h"
 
 /**
+ * str_length - Returns the length of a string.
+ * @s: Input string.
+ *
+ * Return: Length of the string.
+ */
+int str_length(char *s)
+{
+	if (*s == '\0')
+		return (0);
+	return (1 + str_length(s + 1));
+}
+
+/**
  * is_palindrome_helper - Helper function to check if a string is a palindrome.
  * @s: Input string.
  * @start: Starting index.
@@ -20,18 +33,17 @@ int is_palindrome_helper(char *s, int start, int end)
 }
 
 /**
- * is_palindrome - Returns 1 if a string is a palindrome, 0 otherwise.
+ * is_palindrome - Returns 1 if a string is a palindrome and 0 if not.
  * @s: Input string.
  *
  * Return: 1 if the string is a palindrome, 0 otherwise.
  */
 int is_palindrome(char *s)
 {
-	int length = 0;
+	int length = str_length(s);
 
-	/* Calculate the length of the string */
-	while (s[length] != '\0')
-		length++;
+	if (length <= 1)
+		return (1);
 
 	return (is_palindrome_helper(s, 0, length - 1));
 }
