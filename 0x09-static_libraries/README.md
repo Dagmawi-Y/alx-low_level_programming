@@ -1,1 +1,1 @@
-A folder for the static library tasks
+A folder for the static library tasks.
