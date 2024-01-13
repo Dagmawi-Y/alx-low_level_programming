@@ -2,7 +2,7 @@
 #define MAIN_H
 
 /**
- * Desc: header file containing prototypes for all functions
+ * Desc: header file.txt containing prototypes for all functions
  */
 int _putchar(char c);
 char *_strcat(char *dest, char *src);

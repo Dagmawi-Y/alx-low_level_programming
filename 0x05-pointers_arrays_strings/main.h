@@ -2,7 +2,7 @@
 #define MAIN_H
 
 /**
- * Desc: header file containing prototypes for all functions
+ * Desc: header file.txt containing prototypes for all functions
  */
 void _putchar(char c);
 void reset_to_98(int *n);

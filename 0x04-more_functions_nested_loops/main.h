@@ -1,7 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 /*
- * Desc: Header file containing prototypes for all functions
+ * Desc: Header file.txt containing prototypes for all functions
  */
 int _putchar(char c);
 int _isupper(int c);
