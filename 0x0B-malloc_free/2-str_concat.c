@@ -10,7 +10,7 @@
  */
 char *str_concat(char *s1, char *s2)
 {
-	char *strout;
+	char *sout;
 	unsigned int i, j, k, limit;
 
 	if (s1 == NULL)
@@ -24,20 +24,20 @@ char *str_concat(char *s1, char *s2)
 	for (j = 0; s2[j] != '\0'; j++)
 		;
 
-	strout = malloc(sizeof(char) * (i + j + 1));
+	sout = malloc(sizeof(char) * (i + j + 1));
 
-	if (strout == NULL)
+	if (sout == NULL)
 	{
-		free(strout);
+		free(sout);
 		return (NULL);
 	}
 
 	for (k = 0; k < i; k++)
-		strout[k] = s1[k];
+		sout[k] = s1[k];
 
 	limit = j;
 	for (j = 0; j <= limit; k++, j++)
-		strout[k] = s2[j];
+		sout[k] = s2[j];
 
-	return (strout);
+	return (sout);
 }
