@@ -10,7 +10,7 @@
  */
 char *argstostr(int ac, char **av)
 {
-	char *aout;
+	char *argout;
 	int c, i, j, ia;
 
 	if (ac == 0)
@@ -26,11 +26,11 @@ char *argstostr(int ac, char **av)
 		c++;
 	}
 
-	aout = malloc((c + 1) * sizeof(char));
+	argout = malloc((c + 1) * sizeof(char));
 
-	if (aout == NULL)
+	if (argout == NULL)
 	{
-		free(aout);
+		free(argout);
 		return (NULL);
 	}
 
@@ -38,15 +38,15 @@ char *argstostr(int ac, char **av)
 	{
 		if (av[i][j] == '\0')
 		{
-			aout[ia] = '\n';
+			argout[ia] = '\n';
 			i++;
 			ia++;
 			j = 0;
 		}
 		if (ia < c - 1)
-			aout[ia] = av[i][j];
+			argout[ia] = av[i][j];
 	}
-	aout[ia] = '\0';
+	argout[ia] = '\0';
 
-	return (aout);
+	return (argout);
 }
