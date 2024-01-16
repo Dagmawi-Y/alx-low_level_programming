@@ -9,23 +9,23 @@
  */
 int count_word(char *s)
 {
-	int flag, c, w;
+	int in_word, c, word_count;
 
-	flag = 0;
-	w = 0;
+	in_word = 0;
+	word_count = 0;
 
 	for (c = 0; s[c] != '\0'; c++)
 	{
 		if (s[c] == ' ')
-			flag = 0;
-		else if (flag == 0)
+			in_word = 0;
+		else if (in_word == 0)
 		{
 			flag = 1;
-			w++;
+			word_count++;
 		}
 	}
 
-	return (w);
+	return (word_count);
 }
 /**
  * **strtow - splits a string into words
