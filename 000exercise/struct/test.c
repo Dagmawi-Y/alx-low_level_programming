@@ -1,17 +1,25 @@
-//
-// Created by Daggy on 1/23/2024.
-//
 #include <stdio.h>
-struct User
+#include <malloc.h>
+
+
+struct Dog
 {
     char *name;
-    char *email;
-    int age;
 };
+
+
+
 
 int main()
 {
-    struct User user;
-    user.name = "Foo Bar";
-    printf("%s",user.name);
+
+
+    struct Dog *dogPointer;
+    dogPointer = (struct Dog *) malloc(sizeof(struct Dog));
+    dogPointer -> name = "Puppy";
+
+    printf("%s\n", dogPointer->name);
+    free(dogPointer);
+
+    return 0;
 }
