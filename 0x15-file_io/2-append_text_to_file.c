@@ -11,8 +11,8 @@
 int append_text_to_file(const char *filename, char *text_content)
 {
 	int fd;
-	int num_of_letters;
-	int bytes_written;
+	int nletters;
+	int rwr;
 
 	if (!filename)
 		return (-1);
@@ -24,12 +24,12 @@ int append_text_to_file(const char *filename, char *text_content)
 
 	if (text_content)
 	{
-		for (bytes_written = 0; text_content[bytes_written]; bytes_written++)
+		for (nletters = 0; text_content[nletters]; nletters++)
 			;
 
-		bytes_written = write(fd, text_content, num_of_letters);
+		rwr = write(fd, text_content, nletters);
 
-		if (bytes_written == -1)
+		if (rwr == -1)
 			return (-1);
 	}
 
